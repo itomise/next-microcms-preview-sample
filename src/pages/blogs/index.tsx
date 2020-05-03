@@ -32,7 +32,10 @@ const BlogHome: NextPage<Props> = ({ blogs }) => (
   </>
 )
 
-export const getStaticProps: GetStaticProps = async (): Promise<{
+export const getStaticProps: GetStaticProps = async ({
+  preview,
+  previewData
+}): Promise<{
   props: Props
 }> => {
   const key = {
@@ -40,6 +43,16 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
   }
   const res = await axios.get(process.env.END_POINT + 'blogs/?limit=9999', key)
   const data: Array<Blogs> = await res.data.contents
+  // プレビュー時は draft のコンテンツを追加
+  if (preview) {
+    const draftUrl =
+      process.env.END_POINT +
+      'blogs/' +
+      previewData.id +
+      `?draftKey=${previewData.draftKey}`
+    const draftRes = await axios.get(draftUrl, key)
+    data.unshift(await draftRes.data)
+  }
   return {
     props: {
       blogs: data

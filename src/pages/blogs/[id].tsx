@@ -3,6 +3,7 @@ import { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import axios from 'axios'
 import Link from 'next/link'
+import ErrorPage from 'next/error'
 
 interface Props {
   blog: Blogs
@@ -10,6 +11,9 @@ interface Props {
 }
 
 const BlogDetail: NextPage<Props> = (props) => {
+  if (!props.blog) {
+    return <ErrorPage statusCode={404} />
+  }
   return (
     <>
       <Head>
@@ -38,17 +42,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { id: item.id.toString() }
   }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview,
+  previewData
+}) => {
   const key = {
     headers: { 'X-API-KEY': process.env.API_KEY }
   }
-  const res = await axios.get(
-    process.env.END_POINT + 'blogs/' + params?.id,
-    key
-  )
+  let url = process.env.END_POINT + 'blogs/' + params?.id
+  // 下書きは draftKey を含む必要があるのでプレビューの時は追加
+  if (preview) {
+    url += `?draftKey=${previewData.draftKey}`
+  }
+  const res = await axios.get(url, key)
   const data: Blogs = await res.data
   return {
     props: { blog: data }
