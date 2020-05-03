@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {
+      "API_KEY": "xxxxx-xxxxx-xxxxxx",
+      "SECRET_KEY": "xxxxxxx",
+      "END_POINT": "https://xxxxxxx"
+    }
+  }
+}

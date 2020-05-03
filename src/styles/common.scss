@@ -1,0 +1,59 @@
+
+@import './foundation/util.scss';
+@import './foundation/base.scss';
+
+.layout {
+  padding: 30px 60px;
+}
+
+.title {
+  font-size: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.link {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  padding: 10px 30px;
+  transition: all .2s ease-in-out;
+  border: 1px solid rgba($color: #000000, $alpha: 0.0);
+  font-size: 15px;
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+}
+
+.item {
+  padding: 10px 0;
+}
+.item__title {
+  font-size: 20px;
+}
+.item__label {
+  padding: 0 0 10px;
+}
+.item__link {
+  display: inline-block;
+  background-color: #cccccc;
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 10px 30px;
+  transition: all .2s ease-in-out;
+  border: 1px solid rgba($color: #000000, $alpha: 0.0);
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid rgba($color: #000000, $alpha: 1.0);
+  }
+}
+.item__description {
+  font-size: 15px;
+  padding: 10px 0;
+}
