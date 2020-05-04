@@ -34,8 +34,8 @@ const preview: NextApiHandler = async (req, res) => {
     id: req.query.id
   })
 
-  // トップにリダイレクト
-  res.writeHead(307, { Location: `/` })
+  // 詳細ページへリダイレクト
+  res.writeHead(307, { Location: `/blogs/${req.query.id}` })
 
   res.end('Preview mode enabled')
 }
