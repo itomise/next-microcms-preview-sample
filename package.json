@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "next": "9.3.2",
+    "next": "11.1.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
     "sanitize.css": "^11.0.0",
